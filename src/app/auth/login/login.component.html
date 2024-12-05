@@ -22,6 +22,10 @@
       />
     </div>
     <button type="submit">Login</button>
+    <p>
+      Non hai ancora un account?
+      <a [routerLink]="'/auth/register'">Registrati</a>
+    </p>
     <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
   </form>
 </div>

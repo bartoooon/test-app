@@ -1,44 +1,75 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://dummyjson.com/auth/login'; // Endpoint API di DummyJSON
-  private tokenKey = 'token'; // Chiave per il token nel localStorage
+  private apiUrl = 'https://dummyjson.com/auth/login';
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient) {}
 
-  // Metodo per effettuare il login
   login(username: string, password: string): Observable<any> {
-    const body = { username, password };
+    // ! questa butta cosa l'ho fatta solo perchè almeno da un minimo di sensazione di aver creato un'utenza vera 😅😅😅
+    const users = JSON.parse(localStorage.getItem('users') || '[]'); // Recupera gli utenti dal localStorage
+    const user = users.find(
+      (u: any) => u.username === username && u.password === password
+    );
 
-    return this.http.post(this.apiUrl, body).pipe(
+    if (user) {
+      const token = 'dummy-token'; // Genera un token fittizio
+      localStorage.setItem('token', token);
+      return of({ success: true, token }); // Simula una risposta di successo
+    } else {
+      return throwError(() => new Error('Credenziali non valide'));
+    }
+  }
+
+  register(
+    firstName: string,
+    lastName: string,
+    username: string,
+    password: string,
+    email: string,
+    age: number,
+    gender: string
+  ): Observable<any> {
+    const body = {
+      firstName,
+      lastName,
+      username,
+      password,
+      email,
+      age,
+      gender,
+    };
+
+    return this.http.post('https://dummyjson.com/users/add', body).pipe(
       map((response: any) => {
-        if (response && response.token) {
-          this.setToken(response.token); // Salva il token
-        }
-        return response; // Restituisce la risposta completa
+        // ! questa butta cosa l'ho fatta solo perchè almeno da un minimo di sensazione di aver creato un'utenza vera 😅😅😅
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        users.push(response); // Aggiungi l'utente alla lista
+        localStorage.setItem('users', JSON.stringify(users));
+        return response; // Restituisci la risposta della chiamata
       }),
-      catchError(this.handleError) // Gestione errori
+      catchError((error) => {
+        console.error('Errore nella registrazione:', error);
+        return throwError(() => new Error('Registrazione fallita'));
+      })
     );
   }
 
-  // Metodo per gestire il logout
   logout(): void {
-    this.clearToken(); // Rimuove il token dal localStorage
-    // Eventuali altre azioni per il logout (es. reindirizzamento)
+    this.clearToken();
   }
 
-  // Metodo per controllare se l'utente è loggato
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  // Ottieni il token
   getToken(): string | null {
     if (typeof window !== 'undefined' && window.localStorage) {
       return localStorage.getItem(this.tokenKey);
@@ -46,31 +77,26 @@ export class AuthService {
     return null;
   }
 
-  // Salva il token
   private setToken(token: string): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.setItem(this.tokenKey, token);
     }
   }
 
-  // Rimuovi il token
   private clearToken(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem(this.tokenKey);
     }
   }
 
-  // Gestione errori HTTP
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Si è verificato un errore';
     if (error.error instanceof ErrorEvent) {
-      // Errore client
       errorMessage = `Errore: ${error.error.message}`;
     } else {
-      // Errore server
       errorMessage = `Errore Server: ${error.status} - ${error.message}`;
     }
-    console.error(errorMessage); // Log dell'errore
+    console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 }
