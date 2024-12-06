@@ -1,41 +1,82 @@
-<form (ngSubmit)="onRegister()">
-  <div>
-    <label for="firstName">Nome:</label>
-    <input id="firstName" [(ngModel)]="firstName" name="firstName" required />
-  </div>
-  <div>
-    <label for="lastName">Cognome:</label>
-    <input id="lastName" [(ngModel)]="lastName" name="lastName" required />
-  </div>
-  <div>
-    <label for="username">Username:</label>
-    <input id="username" [(ngModel)]="username" name="username" required />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input
-      id="password"
-      [(ngModel)]="password"
-      name="password"
-      type="password"
-      required
-    />
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input id="email" [(ngModel)]="email" name="email" required />
-  </div>
-  <div>
-    <label for="age">Età:</label>
-    <input id="age" [(ngModel)]="age" name="age" type="number" required />
-  </div>
-  <div>
-    <label for="gender">Genere:</label>
-    <select id="gender" [(ngModel)]="gender" name="gender">
-      <option value="male">Maschio</option>
-      <option value="female">Femmina</option>
-    </select>
-  </div>
-  <button type="submit">Registrati</button>
-  <p>Hai già un account? <a [routerLink]="'/auth/login'">Accedi</a></p>
-</form>
+<div class="container-form">
+  <h2>Register</h2>
+  <form (ngSubmit)="onRegister()" class="form-vertical">
+    <!-- <div>
+      <label for="firstName">Nome:</label>
+      <input  />
+    </div> -->
+    <mat-form-field>
+      <mat-label>Nome:</mat-label>
+      <input
+        matInput
+        id="firstName"
+        [(ngModel)]="firstName"
+        name="firstName"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cognome:</mat-label>
+      <input
+        matInput
+        id="lastName"
+        [(ngModel)]="lastName"
+        name="lastName"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username:</mat-label>
+      <input
+        matInput
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password:</mat-label>
+      <input
+        matInput
+        id="username"
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email:</mat-label>
+      <input matInput id="email" [(ngModel)]="email" name="email" required />
+    </mat-form-field>
+    <div class="form-horizontal">
+      <mat-form-field>
+        <mat-label>Età:</mat-label>
+        <input
+          matInput
+          id="age"
+          [(ngModel)]="age"
+          name="age"
+          type="number"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Genere:</mat-label>
+        <mat-select
+          matNativeControl
+          id="gender"
+          [(ngModel)]="gender"
+          name="gender"
+          required
+        >
+          <mat-option value="male">Maschio</mat-option>
+          <mat-option value="female">Femmina</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-fab type="submit" extended>Registrati</button>
+    <p>Hai già un account? <a [routerLink]="'/auth/login'">Accedi</a></p>
+  </form>
+</div>

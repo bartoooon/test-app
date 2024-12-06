@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -15,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
     AuthRoutingModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
   ],
 })
 export class AuthModule {}

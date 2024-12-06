@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', // Registrata globalmente
@@ -7,13 +8,16 @@ import { CanActivate, Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
-  canActivate(): boolean {
-    const isLoggedIn = !!localStorage.getItem('token'); // Controlla se c'è un token
-    if (isLoggedIn) {
-      return true; // Accesso consentito
-    } else {
-      this.router.navigate(['/auth/login']); // Reindirizza alla login
-      return false;
+  canActivate(): Observable<boolean> {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        return of(true); // Consenti l'accesso se il token è presente
+      }
     }
+
+    // In caso contrario, reindirizza o blocca l'accesso
+    this.router.navigate(['/login']);
+    return of(false);
   }
 }
