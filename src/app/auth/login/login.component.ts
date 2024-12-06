@@ -20,7 +20,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (response: any) => {
         console.log('Login successful:', response);
-        localStorage.setItem('token', response.token); // Salva il token
+        localStorage.setItem('token', response.accessToken); // Salva il token
         this.router.navigate(['/products']); // Reindirizza
       },
       error: (err: any) => {
