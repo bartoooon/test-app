@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
+import { ModalContainerComponent } from '../../components/modal-container/modal-container.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-products-list',
   standalone: false,
@@ -33,7 +35,8 @@ export class ProductsListComponent {
 
   constructor(
     private productsService: ProductsService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,9 +70,31 @@ export class ProductsListComponent {
       );
   }
 
-  editProduct(row: any) {}
+  editProduct(row: any) {
+    this.dialog.open(ModalContainerComponent, {
+      width: '500px',
+      data: {
+        title: 'Modale con Componente Dinamico',
+        // component: DynamicContentComponent, // Passa il componente dinamico
+        inputs: {
+          message: 'Ciao dal Modale!', // Passa i dati al componente
+        },
+      },
+    });
+  }
 
-  deleteProduct(row: any) {}
+  deleteProduct(row: any) {
+    this.dialog.open(ModalContainerComponent, {
+      width: '500px',
+      data: {
+        title: 'Modale con Componente Dinamico',
+        // component: DynamicContentComponent, // Passa il componente dinamico
+        inputs: {
+          message: 'Ciao dal Modale!', // Passa i dati al componente
+        },
+      },
+    });
+  }
 
   // Metodo per rilevare lo scroll
   @HostListener('window:scroll', [])

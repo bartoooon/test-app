@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
+import { ModalContainerModule } from '../components/modal-container/modal-container.module';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -17,6 +18,7 @@ import { MatIcon } from '@angular/material/icon';
     MatTableModule,
     MatProgressSpinnerModule,
     MatIcon,
+    ModalContainerModule,
     // BrowserAnimationsModule,
   ],
 })
