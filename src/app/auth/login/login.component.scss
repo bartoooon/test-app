@@ -1,0 +1,17 @@
+.container-form {
+  margin: auto;
+  width: 300px;
+
+  .form-vertical {
+    display: flex;
+    flex-direction: column;
+
+    .container-input {
+      width: 100%;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
