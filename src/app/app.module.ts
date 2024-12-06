@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoaderModule } from './loader/loader.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopBarModule } from './top-bar/top-bar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     LoaderModule,
     MatSnackBarModule,
+    TopBarModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],

@@ -3,6 +3,7 @@
 @use "@angular/material" as mat;
 
 html {
+  background-color: #ebf2fa;
   @include mat.theme(
     (
       color: (

@@ -9,12 +9,7 @@ import { AuthService } from './auth/auth.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/auth/login']); // Reindirizza alla pagina di login
-  }
+  constructor(private authService: AuthService) {}
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
