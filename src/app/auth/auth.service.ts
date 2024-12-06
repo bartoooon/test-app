@@ -67,21 +67,35 @@ export class AuthService {
       age,
       gender,
     };
-    this.loaderService.show(); // Mostra lo spinner
+
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const userExists = users.some((u: any) => u.username === username);
+
+    if (userExists) {
+      return throwError(
+        () => new Error(`L'utente con username "${username}" esiste già.`)
+      );
+    }
+
+    this.loaderService.show();
 
     return this.http.post('https://dummyjson.com/users/add', body).pipe(
       map((response: any) => {
-        // ! questa butta cosa l'ho fatta solo perchè almeno da un minimo di sensazione di aver creato un'utenza vera 😅😅😅
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        users.push(response); // Aggiungi l'utente alla lista
+        users.push(response);
         localStorage.setItem('users', JSON.stringify(users));
-        return response; // Restituisci la risposta della chiamata
+        return response;
       }),
       catchError((error) => {
-        console.error('Errore nella registrazione:', error);
-        return throwError(() => new Error('Registrazione fallita'));
+        if (error.message.includes('esiste già')) {
+          // Lancia nuovamente l'errore specifico
+          return throwError(() => error);
+        } else {
+          // Gestisce errori HTTP
+          console.error('Errore nella registrazione:', error);
+          return throwError(() => new Error('Registrazione fallita'));
+        }
       }),
-      finalize(() => this.loaderService.hide()) // Nascondi lo spinner
+      finalize(() => this.loaderService.hide())
     );
   }
 
