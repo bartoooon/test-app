@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductsService } from '../products.service';
-import { LoaderService } from '../../loader/loader.service';
+import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
 @Component({
   selector: 'app-products-list',

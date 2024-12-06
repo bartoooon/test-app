@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
-import { LoaderService } from '../loader/loader.service';
+import { LoaderService } from '../components/loader/loader.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
