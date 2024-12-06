@@ -1,72 +1,18 @@
-// /* Navbar orizzontale e fissa */
-// .navbar {
-//   position: fixed;
-//   top: 0;
-//   width: 100%;
-//   z-index: 1000; /* Per garantire che sia sopra gli altri elementi */
-//   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-// }
-
-// /* Spaziatore per separare gli elementi */
-// .spacer {
-//   flex: 1 1 auto;
-// }
-
-// /* Per evitare che il contenuto si sovrapponga alla navbar */
-// .content {
-//   margin-top: 64px; /* Altezza del mat-toolbar */
-// }
-
-/* Stile principale della navbar */
-.custom-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 30px;
-  padding: 0 16px;
-  width: 90%;
-  max-width: 800px;
-  margin: 16px auto;
-  background: #427aa1;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+/* Navbar orizzontale e fissa */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Per garantire che sia sopra gli altri elementi */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
-  color: white;
+/* Spaziatore per separare gli elementi */
+.spacer {
+  flex: 1 1 auto;
 }
 
-/* Icone arrotondate ai lati */
-mat-icon {
-  font-size: 24px;
-  color: white;
-}
-
-/* Link della navbar */
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-/* Pulsanti navbar */
-button[mat-button] {
-  font-size: 16px;
-  color: white;
-  background: transparent;
-  border-radius: 20px;
-  text-transform: capitalize;
-  padding: 8px 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Pulsante attivo */
-button[mat-button].active {
-  background: white;
-  color: #7b2ff7;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Aggiunta per il focus */
-button[mat-button]:focus {
-  outline: none;
-  border: 2px solid white;
+/* Per evitare che il contenuto si sovrapponga alla navbar */
+.content {
+  margin-top: 64px; /* Altezza del mat-toolbar */
 }

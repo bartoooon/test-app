@@ -10,7 +10,7 @@ export class GuestGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/products']); // Reindirizza se l'utente è loggato
+      this.router.navigate(['/products-list']); // Reindirizza se l'utente è loggato
       return false; // Blocca l'accesso
     }
     return true; // Permette l'accesso se non è loggato

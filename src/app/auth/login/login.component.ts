@@ -34,7 +34,7 @@ export class LoginComponent {
       next: (response: any) => {
         console.log('Login successful:', response);
         localStorage.setItem('token', response.accessToken); // Salva il token
-        this.router.navigate(['/products']); // Reindirizza
+        this.router.navigate(['/products/products-list']); // Reindirizza
       },
       error: (err: any) => {
         console.error('Login failed:', err);

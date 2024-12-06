@@ -1,20 +1,10 @@
-<mat-toolbar class="custom-navbar" color="primary">
-  <h1>Prodotti</h1>
-  <!-- <button mat-icon-button aria-label="Search">
-    <mat-icon>search</mat-icon>
-  </button> -->
+<mat-toolbar color="primary" class="navbar">
+  <!-- Logo o Nome dell'app -->
+  <img src="/logoipsum-330.svg" />
 
-  <div class="nav-links">
-    <!-- <button mat-button routerLink="/about" routerLinkActive="active">
-      About
-    </button>
-    <button mat-button routerLink="/home" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-    </button>
-    <button mat-button routerLink="/shop" routerLinkActive="active">
-      Shop
-    </button> -->
-  </div>
+  <!-- Spaziatore per separare gli elementi -->
+  <span class="spacer"></span>
 
+  <!-- Link del menu -->
   <button mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
