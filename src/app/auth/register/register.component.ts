@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,11 @@ export class RegisterComponent {
   age: number | null = null;
   gender = 'male';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   onRegister() {
     if (
@@ -41,17 +46,18 @@ export class RegisterComponent {
         )
         .subscribe(
           (response) => {
-            alert('Registrazione completata con successo!');
             this.router.navigate(['/auth/login']);
             console.log(response);
           },
           (error) => {
-            alert('Errore nella registrazione.');
             console.error(error);
           }
         );
     } else {
-      alert('Per favore, compila tutti i campi.');
+      this.snackBar.open('Per favore, compila tutti i campi.', 'Chiudi', {
+        duration: 1500,
+        panelClass: ['error-snackbar'],
+      });
     }
   }
 }

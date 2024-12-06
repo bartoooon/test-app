@@ -92,30 +92,50 @@ export class AuthService {
     const userExists = users.some((u: any) => u.username === username);
 
     if (userExists) {
+      // Mostra lo snackBar se l'utente esiste già
+      this.snackBar.open(
+        `L'utente con username "${username}" esiste già.`,
+        'Chiudi',
+        {
+          duration: 1500,
+          panelClass: ['error-snackbar'],
+        }
+      );
       return throwError(
         () => new Error(`L'utente con username "${username}" esiste già.`)
       );
     }
 
-    this.loaderService.show();
+    this.loaderService.show(); // Mostra lo spinner
 
     return this.http.post('https://dummyjson.com/users/add', body).pipe(
       map((response: any) => {
-        users.push(response);
+        users.push(response); // Aggiungi l'utente al localStorage
         localStorage.setItem('users', JSON.stringify(users));
+
+        // Mostra il success snackBar
+        this.snackBar.open('Registrazione avvenuta con successo!', 'Chiudi', {
+          duration: 1500,
+          panelClass: ['success-snackbar'],
+        });
+
         return response;
       }),
       catchError((error) => {
+        // Gestisci l'errore specifico della registrazione
         if (error.message.includes('esiste già')) {
-          // Lancia nuovamente l'errore specifico
           return throwError(() => error);
         } else {
-          // Gestisce errori HTTP
+          // Altri errori generici
           console.error('Errore nella registrazione:', error);
+          this.snackBar.open('Errore nella registrazione. Riprova.', 'Chiudi', {
+            duration: 1500,
+            panelClass: ['error-snackbar'],
+          });
           return throwError(() => new Error('Registrazione fallita'));
         }
       }),
-      finalize(() => this.loaderService.hide())
+      finalize(() => this.loaderService.hide()) // Nascondi lo spinner
     );
   }
 
