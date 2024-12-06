@@ -13,19 +13,37 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
-    // ! questa butta cosa l'ho fatta solo perchè almeno da un minimo di sensazione di aver creato un'utenza vera 😅😅😅
-    const users = JSON.parse(localStorage.getItem('users') || '[]'); // Recupera gli utenti dal localStorage
-    const user = users.find(
-      (u: any) => u.username === username && u.password === password
-    );
+    const body = { username, password };
 
-    if (user) {
-      const token = 'dummy-token'; // Genera un token fittizio
-      localStorage.setItem('token', token);
-      return of({ success: true, token }); // Simula una risposta di successo
-    } else {
-      return throwError(() => new Error('Credenziali non valide'));
-    }
+    return this.http.post(this.apiUrl, body).pipe(
+      map((response: any) => {
+        if (response && response.token) {
+          this.setToken(response.token); // Salva il token
+        }
+        return response; // Restituisce la risposta completa
+      }),
+      catchError((error) => {
+        // Controlla nel localStorage se l'utente esiste
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(
+          (u: any) => u.username === username && u.password === password
+        );
+
+        if (user) {
+          // Utente trovato nel localStorage, simula un token
+          const fakeToken = 'localstorage-token';
+          this.setToken(fakeToken);
+          return of({
+            message: 'Login effettuato dal localStorage',
+            user,
+            token: fakeToken,
+          });
+        }
+
+        // Se l'utente non esiste nemmeno nel localStorage, lancia l'errore originale
+        return throwError(() => new Error('Credenziali non valide'));
+      })
+    );
   }
 
   register(
