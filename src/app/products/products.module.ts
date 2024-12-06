@@ -6,6 +6,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -15,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ProductsRoutingModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatIcon,
     // BrowserAnimationsModule,
   ],
 })

@@ -4,14 +4,69 @@
 
 table {
   width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto; /* Permette lo scroll orizzontale senza ridurre la larghezza della tabella */
 }
 
 th.mat-header-cell,
 td.mat-cell {
   padding: 8px;
+  text-align: center;
+  position: relative;
 }
 
-mat-header-row,
-mat-row {
-  text-align: center;
+.mat-header-cell,
+.mat-cell {
+  position: relative;
+}
+
+.mat-header-cell .mat-header-row {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.mat-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Permette lo scroll orizzontale delle righe */
+}
+
+.horizontal-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.action-button {
+  background-color: #14424c;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-button:hover {
+  background-color: #14424c;
+}
+
+@media (max-width: 600px) {
+  .horizontal-actions {
+    position: static; /* Riporta i pulsanti delle azioni in linea */
+  }
+
+  .mat-cell {
+    display: block;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .mat-cell:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+  }
 }
