@@ -1,61 +1,78 @@
 <div class="container">
   <h2>Lista dei Prodotti</h2>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
+  <div class="table-wrapper">
+    <!-- Scrollable Table -->
+    <div class="table-scrollable">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Nome</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Prezzo</th>
-      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-    </ng-container>
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Prezzo</th>
+          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+        </ng-container>
 
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef>Descrizione</th>
-      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-    </ng-container>
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrizione</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
 
-    <!-- Edit/Delete Buttons Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Azioni</th>
-      <td mat-cell *matCellDef="let element">
-        <div class="horizontal-actions">
-          <button class="action-button" (click)="editProduct(element)">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="edit"
-            ></mat-icon>
-          </button>
-          <button class="action-button" (click)="deleteProduct(element)">
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="delete"
-            ></mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
+        <!-- Header and Row Definitions -->
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumnsWithoutActions"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsWithoutActions"
+        ></tr>
+      </table>
+    </div>
 
-    <!-- Header and Row Definitions -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+    <!-- Sticky Actions Column -->
+    <div class="table-actions">
+      <table mat-table [dataSource]="dataSource">
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="actions-column">
+            Azioni
+          </th>
+          <td mat-cell *matCellDef="let element" class="actions-column">
+            <div class="horizontal-actions">
+              <button class="action-button" (click)="editProduct(element)">
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Modifica"
+                  fontIcon="edit"
+                ></mat-icon>
+              </button>
+              <button class="action-button" (click)="deleteProduct(element)">
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Elimina"
+                  fontIcon="delete"
+                ></mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
 
-  <!-- Loading Spinner -->
-  <!-- <div *ngIf="isLoading" class="loading-spinner">
-    <mat-spinner></mat-spinner>
-  </div> -->
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="['actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['actions']"></tr>
+      </table>
+    </div>
+  </div>
 </div>

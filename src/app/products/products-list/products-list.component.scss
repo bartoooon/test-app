@@ -1,43 +1,46 @@
-.container {
-  margin: 20px;
+/* Wrapper per la tabella */
+.table-wrapper {
+  display: flex;
+  position: relative;
+  border: 1px solid #ddd;
 }
 
-table {
+/* Parte scrollabile */
+.table-scrollable {
+  overflow-x: auto;
+  flex-grow: 1;
+}
+
+.table-scrollable table {
   width: 100%;
-  border-collapse: collapse;
-  overflow-x: auto; /* Permette lo scroll orizzontale senza ridurre la larghezza della tabella */
+  min-width: 1080px; /* Minima larghezza per il contenuto */
 }
 
+/* Colonna delle azioni fissa */
+.table-actions {
+  position: sticky;
+  right: 0;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  z-index: 10;
+}
+
+.table-actions table {
+  width: auto;
+  border-collapse: collapse;
+}
+
+/* Header e celle */
 th.mat-header-cell,
 td.mat-cell {
   padding: 8px;
   text-align: center;
-  position: relative;
-}
-
-.mat-header-cell,
-.mat-cell {
-  position: relative;
-}
-
-.mat-header-cell .mat-header-row {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  z-index: 1;
-}
-
-.mat-row {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto; /* Permette lo scroll orizzontale delle righe */
 }
 
 .horizontal-actions {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   gap: 10px;
+  justify-content: center;
 }
 
 .action-button {
@@ -50,23 +53,5 @@ td.mat-cell {
 }
 
 .action-button:hover {
-  background-color: #14424c;
-}
-
-@media (max-width: 600px) {
-  .horizontal-actions {
-    position: static; /* Riporta i pulsanti delle azioni in linea */
-  }
-
-  .mat-cell {
-    display: block;
-    padding: 8px;
-    text-align: left;
-  }
-
-  .mat-cell:last-child {
-    position: sticky;
-    right: 0;
-    z-index: 2;
-  }
+  background-color: #0f363f;
 }

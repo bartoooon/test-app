@@ -12,6 +12,12 @@ import { finalize } from 'rxjs';
   styleUrl: './products-list.component.scss',
 })
 export class ProductsListComponent {
+  displayedColumnsWithoutActions: string[] = [
+    'id',
+    'name',
+    'price',
+    'description',
+  ];
   displayedColumns: string[] = [
     'id',
     'name',
@@ -19,6 +25,7 @@ export class ProductsListComponent {
     'description',
     'actions',
   ];
+
   dataSource = new MatTableDataSource<any>();
   limit = 10; // Numero di prodotti da caricare per ogni richiesta
   skip = 0; // Numero di prodotti già caricati
