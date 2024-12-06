@@ -10,7 +10,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-    return this.http.get<any>(this.baseUrl);
+  getProducts(limit: number, skip: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?limit=${limit}&skip=${skip}`);
   }
 }

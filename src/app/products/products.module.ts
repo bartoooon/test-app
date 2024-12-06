@@ -5,6 +5,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -13,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ProductsRoutingModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     // BrowserAnimationsModule,
   ],
 })
