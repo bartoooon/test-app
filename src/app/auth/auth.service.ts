@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, finalize, map } from 'rxjs/operators';
+import { LoaderService } from '../loader/loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,11 @@ export class AuthService {
   private apiUrl = 'https://dummyjson.com/auth/login';
   private tokenKey = 'token';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
+    this.loaderService.show(); // Mostra lo spinner
 
     return this.http.post(this.apiUrl, body).pipe(
       map((response: any) => {
@@ -23,7 +25,7 @@ export class AuthService {
         return response; // Restituisce la risposta completa
       }),
       catchError((error) => {
-        // Controlla nel localStorage se l'utente esiste
+        // ! questa butta cosa l'ho fatta solo perchè almeno da un minimo di sensazione di aver creato un'utenza vera 😅😅😅
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         const user = users.find(
           (u: any) => u.username === username && u.password === password
@@ -42,7 +44,8 @@ export class AuthService {
 
         // Se l'utente non esiste nemmeno nel localStorage, lancia l'errore originale
         return throwError(() => new Error('Credenziali non valide'));
-      })
+      }),
+      finalize(() => this.loaderService.hide()) // Nascondi lo spinner
     );
   }
 
