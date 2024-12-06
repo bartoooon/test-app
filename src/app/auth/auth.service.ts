@@ -67,6 +67,7 @@ export class AuthService {
       age,
       gender,
     };
+    this.loaderService.show(); // Mostra lo spinner
 
     return this.http.post('https://dummyjson.com/users/add', body).pipe(
       map((response: any) => {
@@ -79,7 +80,8 @@ export class AuthService {
       catchError((error) => {
         console.error('Errore nella registrazione:', error);
         return throwError(() => new Error('Registrazione fallita'));
-      })
+      }),
+      finalize(() => this.loaderService.hide()) // Nascondi lo spinner
     );
   }
 
