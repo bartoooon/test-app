@@ -41,7 +41,7 @@ export class AuthService {
 
         // Mostra lo snackbar di errore
         this.snackBar.open(errorMessage, 'Chiudi', {
-          duration: 3000,
+          duration: 1500,
           panelClass: ['error-snackbar'],
         });
 
@@ -137,7 +137,7 @@ export class AuthService {
   private setToken(token: string, currentUser: string): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       this.snackBar.open(`Ciao ${currentUser}!`, 'Chiudi', {
-        duration: 1000,
+        duration: 1500,
         panelClass: ['success-snackbar'],
       });
       localStorage.setItem(this.tokenKey, token);
@@ -147,7 +147,7 @@ export class AuthService {
   private clearToken(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       this.snackBar.open(`Non sei più loggato :(`, 'Chiudi', {
-        duration: 1000,
+        duration: 1500,
         panelClass: ['success-snackbar'],
       });
       localStorage.removeItem(this.tokenKey);
