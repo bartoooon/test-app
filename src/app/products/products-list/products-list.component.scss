@@ -39,6 +39,7 @@ td.mat-cell {
 
 .horizontal-actions {
   display: flex;
+  flex-wrap: nowrap; /* Evita che le chips vadano a capo */
   gap: 10px;
   justify-content: center;
 }
@@ -54,4 +55,23 @@ td.mat-cell {
 
 .action-button:hover {
   background-color: #0f363f;
+}
+
+/* Mantiene le chips su una singola riga */
+.mat-chip-set {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.mat-chip {
+  margin-right: 5px;
+  white-space: nowrap;
+}
+
+/* Limita l'altezza della colonna description */
+.mat-cell.description {
+  max-height: 52px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Evita il wrapping */
 }

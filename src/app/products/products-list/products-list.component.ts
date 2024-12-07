@@ -15,16 +15,20 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProductsListComponent {
   displayedColumnsWithoutActions: string[] = [
-    'id',
-    'name',
+    'title',
+    'brand',
     'price',
-    'description',
+    'rating',
+    'category',
+    'tags',
   ];
   displayedColumns: string[] = [
-    'id',
-    'name',
+    'title',
+    'brand',
     'price',
-    'description',
+    'rating',
+    'category',
+    'tags',
     'actions',
   ];
 
