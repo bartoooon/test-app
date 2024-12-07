@@ -1,11 +1,9 @@
-/* Wrapper per la tabella */
 .table-wrapper {
   display: flex;
   position: relative;
   border: 1px solid #ddd;
 }
 
-/* Parte scrollabile */
 .table-scrollable {
   overflow-x: auto;
   flex-grow: 1;
@@ -13,10 +11,9 @@
 
 .table-scrollable table {
   width: 100%;
-  min-width: 1080px; /* Minima larghezza per il contenuto */
+  min-width: 1080px;
 }
 
-/* Colonna delle azioni fissa */
 .table-actions {
   position: sticky;
   right: 0;
@@ -30,7 +27,6 @@
   border-collapse: collapse;
 }
 
-/* Header e celle */
 th.mat-header-cell,
 td.mat-cell {
   padding: 8px;
@@ -39,7 +35,7 @@ td.mat-cell {
 
 .horizontal-actions {
   display: flex;
-  flex-wrap: nowrap; /* Evita che le chips vadano a capo */
+  flex-wrap: nowrap;
   gap: 10px;
   justify-content: center;
 }
@@ -57,7 +53,6 @@ td.mat-cell {
   background-color: #0f363f;
 }
 
-/* Mantiene le chips su una singola riga */
 .mat-chip-set {
   display: flex;
   flex-wrap: nowrap;
@@ -68,10 +63,17 @@ td.mat-cell {
   white-space: nowrap;
 }
 
-/* Limita l'altezza della colonna description */
 .mat-cell.description {
   max-height: 52px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; /* Evita il wrapping */
+  white-space: nowrap;
+}
+
+.add-product-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  margin-right: 8px;
 }

@@ -11,6 +11,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { AvailableChipModule } from '../components/available-chip/available-chip.module';
 import { DetailModalModule } from '../modals/detail-modal/detail-modal.module';
 import { DeleteModalModule } from '../modals/delete-modal/delete-modal.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -20,6 +21,7 @@ import { DeleteModalModule } from '../modals/delete-modal/delete-modal.module';
     ProductsRoutingModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
     MatIcon,
     MatChipsModule,
     AvailableChipModule,
