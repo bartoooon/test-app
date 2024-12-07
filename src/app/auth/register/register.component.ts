@@ -54,10 +54,7 @@ export class RegisterComponent {
           }
         );
     } else {
-      this.snackBar.open('Per favore, compila tutti i campi.', 'Chiudi', {
-        duration: 1500,
-        panelClass: ['error-snackbar'],
-      });
+      this.authService.showError('Per favore, compila tutti i campi.');
     }
   }
 }

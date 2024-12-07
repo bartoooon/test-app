@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product, ProductsService } from '../../products/products.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-detail-modal',
@@ -25,7 +26,8 @@ export class DetailModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private productsService: ProductsService // Inietta il servizio
+    private productsService: ProductsService,
+    private authService: AuthService
   ) {
     this.product = { ...data.product }; // Imposta i dati iniziali
     this.isEditable = data.isEditable; // Imposta i dati iniziali
@@ -37,6 +39,15 @@ export class DetailModalComponent implements OnInit {
   toggleEdit(): void {
     if (this.isEditable) {
       // Logica per salvare le modifiche (simulazione della POST)
+      if (
+        !this.product.title ||
+        !this.product.price ||
+        !this.product.availabilityStatus
+      ) {
+        // Se i campi non sono compilati, mostra uno snackBar
+        this.authService.showError('Per favore, compila tutti i campi.');
+        return;
+      }
       !this.data.id ? this.addNewProduct() : this.updateProductTitle();
     }
     this.isEditable = !this.isEditable;

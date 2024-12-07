@@ -24,10 +24,7 @@ export class LoginComponent {
   login(): void {
     if (!this.username || !this.password) {
       // Se i campi non sono compilati, mostra uno snackBar
-      this.snackBar.open('Per favore, compila tutti i campi.', 'Chiudi', {
-        duration: 1500,
-        panelClass: ['error-snackbar'],
-      });
+      this.authService.showError('Per favore, compila tutti i campi.');
       return;
     }
     this.authService.login(this.username, this.password).subscribe({

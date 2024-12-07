@@ -14,7 +14,12 @@
     <div class="product-name">
       <mat-form-field appearance="fill" class="full-width" style="width: 96%">
         <mat-label>Nome Prodotto</mat-label>
-        <input matInput [(ngModel)]="product.title" [disabled]="!isEditable" />
+        <input
+          matInput
+          [(ngModel)]="product.title"
+          [disabled]="!isEditable"
+          required
+        />
       </mat-form-field>
     </div>
 
@@ -26,6 +31,7 @@
           [(ngModel)]="product.price"
           [disabled]="!isEditable"
           type="number"
+          required
         />
       </mat-form-field>
 
@@ -34,6 +40,7 @@
         <mat-select
           [(ngModel)]="product.availabilityStatus"
           [disabled]="!isEditable"
+          required
         >
           <mat-option
             *ngFor="let status of availabilityStatuses"
