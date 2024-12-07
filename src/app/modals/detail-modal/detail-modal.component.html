@@ -14,7 +14,7 @@
     <div class="product-name">
       <mat-form-field appearance="fill" class="full-width" style="width: 96%">
         <mat-label>Nome Prodotto</mat-label>
-        <input matInput [(ngModel)]="data.title" [disabled]="!isEditable" />
+        <input matInput [(ngModel)]="product.title" [disabled]="!isEditable" />
       </mat-form-field>
     </div>
 
@@ -23,7 +23,7 @@
         <mat-label>Prezzo</mat-label>
         <input
           matInput
-          [(ngModel)]="data.price"
+          [(ngModel)]="product.price"
           [disabled]="!isEditable"
           type="number"
         />
@@ -32,7 +32,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Disponibilità</mat-label>
         <mat-select
-          [(ngModel)]="data.availabilityStatus"
+          [(ngModel)]="product.availabilityStatus"
           [disabled]="!isEditable"
         >
           <mat-option
@@ -46,24 +46,28 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Categoria</mat-label>
-        <input matInput [(ngModel)]="data.category" [disabled]="!isEditable" />
+        <input
+          matInput
+          [(ngModel)]="product.category"
+          [disabled]="!isEditable"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Marca</mat-label>
-        <input matInput [(ngModel)]="data.brand" [disabled]="!isEditable" />
+        <input matInput [(ngModel)]="product.brand" [disabled]="!isEditable" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Rating</mat-label>
-        <input matInput [(ngModel)]="data.rating" [disabled]="!isEditable" />
+        <input matInput [(ngModel)]="product.rating" [disabled]="!isEditable" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Tags</mat-label>
         <input
           matInput
-          [(ngModel)]="data.tags"
+          [(ngModel)]="product.tags"
           [disabled]="!isEditable"
           placeholder="Aggiungi un tag"
         />

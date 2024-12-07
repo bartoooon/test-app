@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product, ProductsService } from '../../products/products.service';
 
@@ -11,19 +18,21 @@ import { Product, ProductsService } from '../../products/products.service';
 export class DetailModalComponent implements OnInit {
   @Output() productUpdated = new EventEmitter<any>(); // Evento per notificare il padre
 
-  isEditable = false; // Inizialmente i campi sono disabilitati
-  data: any; // Per contenere i dati del prodotto
+  @Input() isEditable = false; // Inizialmente i campi sono disabilitati
+  product: any; // Per contenere i dati del prodotto
   availabilityStatuses = ['In Stock', 'Low Stock', 'Out of Stock'];
 
   constructor(
     public dialogRef: MatDialogRef<DetailModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public productData: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private productsService: ProductsService // Inietta il servizio
   ) {
-    this.data = { ...productData }; // Imposta i dati iniziali
+    this.product = { ...data }; // Imposta i dati iniziali
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.product);
+  }
 
   // Funzione per alternare lo stato di modifica
   toggleEdit(): void {
@@ -48,26 +57,28 @@ export class DetailModalComponent implements OnInit {
 
   updateProductTitle(): void {
     const updatedData: any = {
-      title: this.data.title,
-      price: this.data.price,
-      category: this.data.category,
-      brand: this.data.brand,
-      rating: this.data.rating,
-      availabilityStatus: this.data.availabilityStatus,
-      tags: this.data.tags,
+      title: this.product.title,
+      price: this.product.price,
+      category: this.product.category,
+      brand: this.product.brand,
+      rating: this.product.rating,
+      availabilityStatus: this.product.availabilityStatus,
+      tags: this.product.tags,
     };
     if (Object.keys(updatedData).length > 0) {
       // Se ci sono modifiche, chiama il servizio per aggiornare il prodotto
-      this.productsService.updateProduct(this.data.id, updatedData).subscribe(
-        (response) => {
-          console.log('Product updated:', response);
-          this.productUpdated.emit(this.data); // Notifica al componente padre dell'aggiornamento
-          this.dialogRef.close(this.data); // Chiudi la modale dopo l'aggiornamento
-        },
-        (error) => {
-          console.error('Error updating product:', error);
-        }
-      );
+      this.productsService
+        .updateProduct(this.product.id, updatedData)
+        .subscribe(
+          (response) => {
+            console.log('Product updated:', response);
+            this.productUpdated.emit(this.product); // Notifica al componente padre dell'aggiornamento
+            this.dialogRef.close(this.product); // Chiudi la modale dopo l'aggiornamento
+          },
+          (error) => {
+            console.error('Error updating product:', error);
+          }
+        );
     } else {
       console.log('No changes to update.');
     }

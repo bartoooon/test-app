@@ -76,6 +76,22 @@ export class ProductsListComponent implements OnInit {
       );
   }
 
+  createProduct(): void {
+    const dialogRef: MatDialogRef<DetailModalComponent> = this.dialog.open(
+      DetailModalComponent,
+      {
+        width: '500px',
+        data: { isEditable: true },
+      }
+    );
+
+    dialogRef.afterClosed().subscribe((newProduct: Product) => {
+      if (newProduct) {
+        // this.onProductCreated(newProduct);
+      }
+    });
+  }
+
   openProduct(product: Product): void {
     const dialogRef: MatDialogRef<DetailModalComponent> = this.dialog.open(
       DetailModalComponent,
