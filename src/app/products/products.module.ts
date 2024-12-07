@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { AvailableChipModule } from '../components/available-chip/available-chip.module';
 import { DetailModalModule } from '../modals/detail-modal/detail-modal.module';
+import { DeleteModalModule } from '../modals/delete-modal/delete-modal.module';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -23,6 +24,7 @@ import { DetailModalModule } from '../modals/detail-modal/detail-modal.module';
     MatChipsModule,
     AvailableChipModule,
     DetailModalModule,
+    DeleteModalModule,
     // BrowserAnimationsModule,
   ],
 })

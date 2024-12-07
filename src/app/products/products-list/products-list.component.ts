@@ -6,6 +6,7 @@ import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.component';
+import { DeleteModalComponent } from '../../modals/delete-modal/delete-modal.component';
 @Component({
   selector: 'app-products-list',
   standalone: false,
@@ -101,7 +102,29 @@ export class ProductsListComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    // Logica per eliminare il prodotto
+    const dialogRef: MatDialogRef<DeleteModalComponent> = this.dialog.open(
+      DeleteModalComponent,
+      {
+        width: '500px',
+        data: product,
+      }
+    );
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.onProductDeleted(result);
+      }
+    });
+  }
+
+  onProductDeleted(deletedProduct: Product): void {
+    const index = this.dataSource.data.findIndex(
+      (product) => product.id === deletedProduct.id
+    );
+    if (index !== -1) {
+      // Rimuove il prodotto dalla lista
+      this.dataSource.data.splice(index, 1);
+      this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
+    }
   }
 
   // Metodo per rilevare lo scroll e caricare altri prodotti quando la pagina viene scrollata

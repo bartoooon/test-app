@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h2 mat-dialog-title>Elimina Prodotto</h2>
+  <button
+    mat-icon-button
+    (click)="close()"
+    class="close-button"
+    aria-label="Chiudi"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="modal-content">
+  <p>
+    Confermi di voler eliminare il prodotto <strong>{{ data.title }}</strong
+    >?
+  </p>
+
+  <div class="modal-footer">
+    <button
+      mat-raised-button
+      color="primary"
+      class="edit-button"
+      (click)="confirm(data)"
+    >
+      Conferma
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="edit-button"
+      (click)="close()"
+    >
+      Annulla
+    </button>
+  </div>
+</mat-dialog-content>
