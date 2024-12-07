@@ -16,3 +16,48 @@ mat-dialog-content {
   font-size: 16px;
   margin-top: 10px;
 }
+
+.product-details {
+  display: grid;
+  grid-template-columns: 1fr; /* Per la prima riga, una sola colonna */
+  gap: 16px;
+}
+
+.product-name {
+  grid-column: span 2; /* Fai in modo che il nome prodotto prenda tutta la larghezza della prima riga */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Due colonne per gli altri campi */
+  gap: 16px;
+}
+
+.mat-form-field.full-width {
+  width: 96% !important;
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Su schermi piccoli, metti tutto in una colonna */
+  }
+}
+
+/* Modal content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-details {
+  flex-grow: 1; /* Permette al contenuto di espandersi e occupare tutto lo spazio disponibile */
+  overflow-y: auto; /* Aggiunge una barra di scorrimento se il contenuto è troppo lungo */
+}
+
+.edit-button {
+  margin-top: auto; /* Spinge il bottone in fondo */
+  width: auto; /* Imposta la larghezza automatica */
+  align-self: flex-start; /* Allinea il bottone a sinistra o a destra, a seconda delle preferenze */
+  height: 48px;
+}

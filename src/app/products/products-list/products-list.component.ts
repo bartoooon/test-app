@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProductResponse, ProductsService } from '../products.service';
+import { Product, ProductResponse, ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -75,14 +75,14 @@ export class ProductsListComponent {
       );
   }
 
-  editProduct(product: any) {
+  openProduct(product: Product) {
     this.dialog.open(DetailModalComponent, {
-      // width: '400px',
+      width: '500px',
       data: product,
     });
   }
 
-  deleteProduct(row: any) {
+  deleteProduct(product: Product) {
     // this.dialog.open(ModalContainerComponent, {
     //   width: '500px',
     //   data: {

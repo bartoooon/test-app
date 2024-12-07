@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h2 mat-dialog-title>Dettagli Prodotto</h2>
+  <h2 mat-dialog-title>Dettaglio del Prodotto</h2>
   <button
     mat-icon-button
     (click)="close()"
@@ -9,8 +9,69 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-dialog-content>
-  <p><strong>Nome:</strong> {{ data.name }}</p>
-  <p><strong>Descrizione:</strong> {{ data.description }}</p>
-  <p><strong>Prezzo:</strong> {{ data.price | currency }}</p>
+<mat-dialog-content class="modal-content">
+  <div class="product-details">
+    <div class="product-name">
+      <mat-form-field appearance="fill" class="full-width" style="width: 96%">
+        <mat-label>Nome Prodotto</mat-label>
+        <input matInput [(ngModel)]="data.title" [disabled]="!isEditable" />
+      </mat-form-field>
+    </div>
+
+    <div class="grid-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Prezzo</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.price"
+          [disabled]="!isEditable"
+          type="number"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Disponibilità</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.availabilityStatus"
+          [disabled]="!isEditable"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <input matInput [(ngModel)]="data.category" [disabled]="!isEditable" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Marca</mat-label>
+        <input matInput [(ngModel)]="data.brand" [disabled]="!isEditable" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rating</mat-label>
+        <input matInput [(ngModel)]="data.rating" [disabled]="!isEditable" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.tags"
+          [disabled]="!isEditable"
+          placeholder="Aggiungi un tag"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Pulsante Edit -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="toggleEdit()"
+    class="edit-button"
+  >
+    {{ isEditable ? "Salva" : "Modifica" }}
+  </button>
 </mat-dialog-content>
