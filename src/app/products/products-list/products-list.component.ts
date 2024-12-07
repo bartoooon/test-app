@@ -148,6 +148,14 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
+  processedTags(element: any): string[] {
+    if (typeof element === 'string') {
+      // Trasforma la stringa in un array separando con la virgola (o altro separatore)
+      return element.split(',').map((tag) => tag.trim());
+    }
+    return element || [];
+  }
+
   // Metodo per rilevare lo scroll e caricare altri prodotti quando la pagina viene scrollata
   @HostListener('window:scroll', [])
   onScroll(): void {
