@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
-import { ModalContainerModule } from '../components/modal-container/modal-container.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { AvailableChipModule } from '../components/available-chip/available-chip.module';
 
@@ -20,7 +19,6 @@ import { AvailableChipModule } from '../components/available-chip/available-chip
     MatTableModule,
     MatProgressSpinnerModule,
     MatIcon,
-    ModalContainerModule,
     MatChipsModule,
     AvailableChipModule,
     // BrowserAnimationsModule,

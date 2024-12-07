@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
-import { ModalContainerComponent } from '../../components/modal-container/modal-container.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-products-list',
@@ -76,29 +75,29 @@ export class ProductsListComponent {
   }
 
   editProduct(row: any) {
-    this.dialog.open(ModalContainerComponent, {
-      width: '500px',
-      data: {
-        title: 'Modale con Componente Dinamico',
-        // component: DynamicContentComponent, // Passa il componente dinamico
-        inputs: {
-          message: 'Ciao dal Modale!', // Passa i dati al componente
-        },
-      },
-    });
+    // this.dialog.open(ModalContainerComponent, {
+    //   width: '500px',
+    //   data: {
+    //     title: 'Modale con Componente Dinamico',
+    //     // component: DynamicContentComponent, // Passa il componente dinamico
+    //     inputs: {
+    //       message: 'Ciao dal Modale!', // Passa i dati al componente
+    //     },
+    //   },
+    // });
   }
 
   deleteProduct(row: any) {
-    this.dialog.open(ModalContainerComponent, {
-      width: '500px',
-      data: {
-        title: 'Modale con Componente Dinamico',
-        // component: DynamicContentComponent, // Passa il componente dinamico
-        inputs: {
-          message: 'Ciao dal Modale!', // Passa i dati al componente
-        },
-      },
-    });
+    // this.dialog.open(ModalContainerComponent, {
+    //   width: '500px',
+    //   data: {
+    //     title: 'Modale con Componente Dinamico',
+    //     // component: DynamicContentComponent, // Passa il componente dinamico
+    //     inputs: {
+    //       message: 'Ciao dal Modale!', // Passa i dati al componente
+    //     },
+    //   },
+    // });
   }
 
   // Metodo per rilevare lo scroll
