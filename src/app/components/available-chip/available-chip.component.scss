@@ -1,0 +1,16 @@
+mat-chip {
+  color: #fff !important; /* Colore del testo */
+  font-weight: bold;
+
+  &.chip-in-stock {
+    background-color: #4caf50; /* Verde */
+  }
+
+  &.chip-low-stock {
+    background-color: #ff9800; /* Arancione */
+  }
+
+  &.chip-out-of-stock {
+    background-color: #f44336; /* Rosso */
+  }
+}

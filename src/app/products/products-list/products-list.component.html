@@ -11,16 +11,20 @@
           <td mat-cell *matCellDef="let element">{{ element.title }}</td>
         </ng-container>
 
+        <!-- AvailabilityStatus Column -->
+        <ng-container matColumnDef="availabilityStatus">
+          <th mat-header-cell *matHeaderCellDef>Disponibilità</th>
+          <td mat-cell *matCellDef="let element">
+            <app-available-chip
+              [availability]="element.availabilityStatus"
+            ></app-available-chip>
+          </td>
+        </ng-container>
+
         <!-- Brand Column -->
         <ng-container matColumnDef="brand">
           <th mat-header-cell *matHeaderCellDef>Brand</th>
           <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
-        </ng-container>
-
-        <!-- Price Column -->
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Prezzo</th>
-          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
         </ng-container>
 
         <!-- Rating Column -->
@@ -60,7 +64,16 @@
     <!-- Sticky Actions Column -->
     <div class="table-actions">
       <table mat-table [dataSource]="dataSource">
-        <!-- Actions Column -->
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="actions-column">
+            Prezzo
+          </th>
+          <td mat-cell *matCellDef="let element" class="actions-column">
+            {{ element.price }}
+          </td>
+          <!-- Actions Column -->
+        </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef class="actions-column">
             Azioni
@@ -86,8 +99,8 @@
         </ng-container>
 
         <!-- Header and Row Definitions -->
-        <tr mat-header-row *matHeaderRowDef="['actions']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['actions']"></tr>
+        <tr mat-header-row *matHeaderRowDef="['price', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['price', 'actions']"></tr>
       </table>
     </div>
   </div>
