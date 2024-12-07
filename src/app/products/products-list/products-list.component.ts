@@ -81,7 +81,7 @@ export class ProductsListComponent implements OnInit {
       DetailModalComponent,
       {
         width: '500px',
-        data: { isEditable: true },
+        data: { product: null, isEditable: true },
       }
     );
 
@@ -97,7 +97,7 @@ export class ProductsListComponent implements OnInit {
       DetailModalComponent,
       {
         width: '500px',
-        data: product,
+        data: { product: product },
       }
     );
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -122,7 +122,7 @@ export class ProductsListComponent implements OnInit {
       DeleteModalComponent,
       {
         width: '500px',
-        data: product,
+        data: { product: product },
       }
     );
     dialogRef.afterClosed().subscribe((result: any) => {

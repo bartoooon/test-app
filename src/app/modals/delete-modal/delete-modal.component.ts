@@ -21,7 +21,7 @@ export class DeleteModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private productsService: ProductsService // Inietta il servizio
   ) {
-    this.product = { ...data }; // Imposta i dati iniziali
+    this.product = { ...data.product }; // Imposta i dati iniziali
   }
   // Funzione per chiudere la modale
   close(data?: any): void {

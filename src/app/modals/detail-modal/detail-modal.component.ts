@@ -18,8 +18,8 @@ import { Product, ProductsService } from '../../products/products.service';
 export class DetailModalComponent implements OnInit {
   @Output() productUpdated = new EventEmitter<any>(); // Evento per notificare il padre
 
-  @Input() isEditable = false; // Inizialmente i campi sono disabilitati
-  product: any; // Per contenere i dati del prodotto
+  isEditable: boolean = false; // Inizialmente i campi sono disabilitati
+  product: Product; // Per contenere i dati del prodotto
   availabilityStatuses = ['In Stock', 'Low Stock', 'Out of Stock'];
 
   constructor(
@@ -27,11 +27,13 @@ export class DetailModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private productsService: ProductsService // Inietta il servizio
   ) {
-    this.product = { ...data }; // Imposta i dati iniziali
+    this.product = { ...data.product }; // Imposta i dati iniziali
+    this.isEditable = data.isEditable; // Imposta i dati iniziali
   }
 
   ngOnInit(): void {
-    console.log(this.product);
+    console.log(this.data);
+    console.log(this.isEditable);
   }
 
   // Funzione per alternare lo stato di modifica
