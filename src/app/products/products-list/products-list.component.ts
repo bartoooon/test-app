@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Product, ProductResponse, ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.component';
 @Component({
   selector: 'app-products-list',
@@ -13,7 +13,7 @@ import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.com
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
 })
-export class ProductsListComponent {
+export class ProductsListComponent implements OnInit {
   displayedColumnsWithoutActions: string[] = [
     'title',
     'availabilityStatus',
@@ -75,27 +75,36 @@ export class ProductsListComponent {
       );
   }
 
-  openProduct(product: Product) {
-    this.dialog.open(DetailModalComponent, {
-      width: '500px',
-      data: product,
+  openProduct(product: Product): void {
+    const dialogRef: MatDialogRef<DetailModalComponent> = this.dialog.open(
+      DetailModalComponent,
+      {
+        width: '500px',
+        data: product,
+      }
+    );
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.onProductUpdated(result);
+      }
     });
+  }
+  // Funzione per ricevere i dati aggiornati dalla modale
+  onProductUpdated(updatedProduct: Product): void {
+    const index = this.dataSource.data.findIndex(
+      (product) => product.id === updatedProduct.id
+    );
+    if (index !== -1) {
+      this.dataSource.data[index] = updatedProduct; // Aggiorna il prodotto nella lista
+      this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
+    }
   }
 
   deleteProduct(product: Product) {
-    // this.dialog.open(ModalContainerComponent, {
-    //   width: '500px',
-    //   data: {
-    //     title: 'Modale con Componente Dinamico',
-    //     // component: DynamicContentComponent, // Passa il componente dinamico
-    //     inputs: {
-    //       message: 'Ciao dal Modale!', // Passa i dati al componente
-    //     },
-    //   },
-    // });
+    // Logica per eliminare il prodotto
   }
 
-  // Metodo per rilevare lo scroll
+  // Metodo per rilevare lo scroll e caricare altri prodotti quando la pagina viene scrollata
   @HostListener('window:scroll', [])
   onScroll(): void {
     if (this.isLoading) return;

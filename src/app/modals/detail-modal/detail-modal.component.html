@@ -31,11 +31,17 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Disponibilità</mat-label>
-        <input
-          matInput
+        <mat-select
           [(ngModel)]="data.availabilityStatus"
           [disabled]="!isEditable"
-        />
+        >
+          <mat-option
+            *ngFor="let status of availabilityStatuses"
+            [value]="status"
+          >
+            {{ status }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
