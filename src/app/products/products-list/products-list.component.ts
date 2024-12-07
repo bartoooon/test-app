@@ -87,9 +87,14 @@ export class ProductsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((newProduct: Product) => {
       if (newProduct) {
-        // this.onProductCreated(newProduct);
+        this.onProductCreated(newProduct);
       }
     });
+  }
+
+  onProductCreated(newProduct: Product): void {
+    this.dataSource.data.unshift(newProduct); // Aggiungi il nuovo prodotto all'inizio della lista
+    this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
   }
 
   openProduct(product: Product): void {
