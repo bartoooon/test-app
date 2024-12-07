@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProductsService } from '../products.service';
+import { ProductResponse, ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -62,23 +62,23 @@ export class ProductsListComponent {
         })
       )
       .subscribe(
-        (response) => {
+        (response: ProductResponse) => {
           this.dataSource.data = [
             ...this.dataSource.data,
             ...response.products,
           ];
           this.skip += this.limit; // Incrementa il numero di prodotti caricati
         },
-        (error) => {
+        (error: Error) => {
           console.error('Error loading products', error);
         }
       );
   }
 
-  editProduct(row: any) {
+  editProduct(product: any) {
     this.dialog.open(DetailModalComponent, {
-      width: '400px',
-      data: {},
+      // width: '400px',
+      data: product,
     });
   }
 
