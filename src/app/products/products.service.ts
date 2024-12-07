@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth/auth.service';
 
 export interface Review {
   rating?: number;
@@ -61,23 +63,77 @@ export interface ProductResponse {
 export class ProductsService {
   private baseUrl = 'https://dummyjson.com/products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getProducts(limit: number, skip: number): Observable<ProductResponse> {
-    return this.http.get<any>(`${this.baseUrl}?limit=${limit}&skip=${skip}`);
+    return new Observable<ProductResponse>((observer) => {
+      this.http
+        .get<ProductResponse>(`${this.baseUrl}?limit=${limit}&skip=${skip}`)
+        .subscribe({
+          next: (response) => {
+            // this.showSuccess('Prodotti caricati con successo!');
+            observer.next(response);
+            observer.complete();
+          },
+          error: (err) => {
+            this.authService.showError(
+              'Errore durante il caricamento dei prodotti.'
+            );
+            observer.error(err);
+          },
+        });
+    });
   }
 
-  addProduct(newProduct: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/add`, newProduct);
+  addProduct(newProduct: Product): Observable<any> {
+    return new Observable<any>((observer) => {
+      this.http.post(`${this.baseUrl}/add`, newProduct).subscribe({
+        next: (response) => {
+          this.authService.showSuccess('Prodotto aggiunto con successo!');
+          observer.next(response);
+          observer.complete();
+        },
+        error: (err) => {
+          this.authService.showError("Errore durante l'aggiunta del prodotto.");
+          observer.error(err);
+        },
+      });
+    });
   }
 
-  // Funzione per aggiornare un prodotto (per esempio il titolo)
   updateProduct(id: number, updatedData: Product): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, updatedData);
+    return new Observable<any>((observer) => {
+      this.http.put(`${this.baseUrl}/${id}`, updatedData).subscribe({
+        next: (response) => {
+          this.authService.showSuccess('Prodotto aggiornato con successo!');
+          observer.next(response);
+          observer.complete();
+        },
+        error: (err) => {
+          this.authService.showError(
+            "Errore durante l'aggiornamento del prodotto."
+          );
+          observer.error(err);
+        },
+      });
+    });
   }
 
   deleteProduct(productId: number): Observable<any> {
-    const url = `${this.baseUrl}/${productId}`;
-    return this.http.delete(url);
+    return new Observable<any>((observer) => {
+      this.http.delete(`${this.baseUrl}/${productId}`).subscribe({
+        next: (response) => {
+          this.authService.showSuccess('Prodotto eliminato con successo!');
+          observer.next(response);
+          observer.complete();
+        },
+        error: (err) => {
+          this.authService.showError(
+            "Errore durante l'eliminazione del prodotto."
+          );
+          observer.error(err);
+        },
+      });
+    });
   }
 }

@@ -18,6 +18,20 @@ export class AuthService {
     private snackBar: MatSnackBar
   ) {}
 
+  public showSuccess(message: string): void {
+    this.snackBar.open(message, 'Chiudi', {
+      duration: 1500,
+      panelClass: ['success-snackbar'],
+    });
+  }
+
+  public showError(message: string): void {
+    this.snackBar.open(message, 'Chiudi', {
+      duration: 1500,
+      panelClass: ['error-snackbar'],
+    });
+  }
+
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
     this.loaderService.show(); // Mostra lo spinner
@@ -40,10 +54,7 @@ export class AuthService {
         }
 
         // Mostra lo snackbar di errore
-        this.snackBar.open(errorMessage, 'Chiudi', {
-          duration: 1500,
-          panelClass: ['error-snackbar'],
-        });
+        this.showError(errorMessage);
 
         // Controlla se l'utente è presente nel localStorage
         const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -93,14 +104,8 @@ export class AuthService {
 
     if (userExists) {
       // Mostra lo snackBar se l'utente esiste già
-      this.snackBar.open(
-        `L'utente con username "${username}" esiste già.`,
-        'Chiudi',
-        {
-          duration: 1500,
-          panelClass: ['error-snackbar'],
-        }
-      );
+      this.showError(`L'utente con username "${username}" esiste già.`);
+
       return throwError(
         () => new Error(`L'utente con username "${username}" esiste già.`)
       );
@@ -114,10 +119,7 @@ export class AuthService {
         localStorage.setItem('users', JSON.stringify(users));
 
         // Mostra il success snackBar
-        this.snackBar.open('Registrazione avvenuta con successo!', 'Chiudi', {
-          duration: 1500,
-          panelClass: ['success-snackbar'],
-        });
+        this.showSuccess('Registrazione avvenuta con successo!');
 
         return response;
       }),
@@ -128,10 +130,8 @@ export class AuthService {
         } else {
           // Altri errori generici
           console.error('Errore nella registrazione:', error);
-          this.snackBar.open('Errore nella registrazione. Riprova.', 'Chiudi', {
-            duration: 1500,
-            panelClass: ['error-snackbar'],
-          });
+          this.showError('Errore nella registrazione. Riprova.');
+
           return throwError(() => new Error('Registrazione fallita'));
         }
       }),
@@ -156,10 +156,7 @@ export class AuthService {
 
   private setToken(token: string, currentUser: string): void {
     if (typeof window !== 'undefined' && window.localStorage) {
-      this.snackBar.open(`Ciao ${currentUser}!`, 'Chiudi', {
-        duration: 1500,
-        panelClass: ['success-snackbar'],
-      });
+      this.showSuccess(`Ciao ${currentUser}!`);
       localStorage.setItem(this.tokenKey, token);
     }
   }
@@ -170,6 +167,7 @@ export class AuthService {
         duration: 1500,
         panelClass: ['success-snackbar'],
       });
+      this.showError(`Non sei più loggato :(`);
       localStorage.removeItem(this.tokenKey);
     }
   }
