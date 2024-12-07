@@ -163,10 +163,6 @@ export class AuthService {
 
   private clearToken(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
-      this.snackBar.open(`Non sei più loggato :(`, 'Chiudi', {
-        duration: 1500,
-        panelClass: ['success-snackbar'],
-      });
       this.showError(`Non sei più loggato :(`);
       localStorage.removeItem(this.tokenKey);
     }
