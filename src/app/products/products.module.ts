@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { AvailableChipModule } from '../components/available-chip/available-chip.module';
+import { DetailModalModule } from '../modals/detail-modal/detail-modal.module';
 
 @NgModule({
   declarations: [ProductsListComponent],
@@ -21,6 +22,7 @@ import { AvailableChipModule } from '../components/available-chip/available-chip
     MatIcon,
     MatChipsModule,
     AvailableChipModule,
+    DetailModalModule,
     // BrowserAnimationsModule,
   ],
 })

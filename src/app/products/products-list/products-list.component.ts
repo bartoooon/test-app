@@ -5,6 +5,7 @@ import { ProductsService } from '../products.service';
 import { LoaderService } from '../../components/loader/loader.service';
 import { finalize } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.component';
 @Component({
   selector: 'app-products-list',
   standalone: false,
@@ -75,16 +76,10 @@ export class ProductsListComponent {
   }
 
   editProduct(row: any) {
-    // this.dialog.open(ModalContainerComponent, {
-    //   width: '500px',
-    //   data: {
-    //     title: 'Modale con Componente Dinamico',
-    //     // component: DynamicContentComponent, // Passa il componente dinamico
-    //     inputs: {
-    //       message: 'Ciao dal Modale!', // Passa i dati al componente
-    //     },
-    //   },
-    // });
+    this.dialog.open(DetailModalComponent, {
+      width: '400px',
+      data: {},
+    });
   }
 
   deleteProduct(row: any) {

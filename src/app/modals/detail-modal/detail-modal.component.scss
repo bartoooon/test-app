@@ -1,0 +1,18 @@
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 8px 0;
+  border-bottom: 1px solid #ccc;
+}
+.close-button {
+  color: #555;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-right: 8px;
+}
+mat-dialog-content {
+  font-size: 16px;
+  margin-top: 10px;
+}
