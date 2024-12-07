@@ -13,8 +13,8 @@ const routes: Routes = [
       import('./products/products.module').then((m) => m.ProductsModule),
     canActivate: [AuthGuard],
   }, // Protegge le rotte
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth/login' },
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  // { path: '**', redirectTo: 'auth/login' },
 ];
 
 @NgModule({

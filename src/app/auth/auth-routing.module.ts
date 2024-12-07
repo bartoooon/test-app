@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { GuestGuard } from './guest.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [GuestGuard] },
 ];
