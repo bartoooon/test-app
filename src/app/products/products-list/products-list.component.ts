@@ -16,6 +16,7 @@ import { DeleteModalComponent } from '../../modals/delete-modal/delete-modal.com
 })
 export class ProductsListComponent implements OnInit {
   displayedColumnsWithoutActions: string[] = [
+    'price',
     'title',
     'availabilityStatus',
     'brand',
@@ -24,13 +25,13 @@ export class ProductsListComponent implements OnInit {
     'tags',
   ];
   displayedColumns: string[] = [
+    'price',
     'title',
     'availabilityStatus',
     'brand',
     'rating',
     'category',
     'tags',
-    'price',
     'actions',
   ];
 
