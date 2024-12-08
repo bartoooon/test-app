@@ -7,7 +7,7 @@ import { AuthService } from '../auth/auth.service';
 export interface Review {
   rating?: number;
   comment?: string;
-  date?: string; // Data in formato stringa ISO 8601
+  date?: string;
   reviewerName?: string;
   reviewerEmail?: string;
 }
@@ -19,8 +19,8 @@ export interface Dimensions {
 }
 
 export interface Meta {
-  createdAt?: string; // Data in formato stringa ISO 8601
-  updatedAt?: string; // Data in formato stringa ISO 8601
+  createdAt?: string;
+  updatedAt?: string;
   barcode?: string;
   qrCode?: string;
 }

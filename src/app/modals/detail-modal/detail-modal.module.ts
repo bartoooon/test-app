@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatGridListModule } from '@angular/material/grid-list'; // Importa MatGridListModule
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [DetailModalComponent],

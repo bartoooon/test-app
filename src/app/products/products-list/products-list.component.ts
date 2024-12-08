@@ -51,7 +51,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    if (this.isLoading) return; // Previeni richieste multiple
+    if (this.isLoading) return;
     this.isLoading = true;
     this.loaderService.show(); // Mostra il loader
 
@@ -60,7 +60,7 @@ export class ProductsListComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.loaderService.hide(); // Nascondi il loader una volta completato
-          this.isLoading = false; // Rimuovi il flag di caricamento
+          this.isLoading = false;
         })
       )
       .subscribe(
@@ -69,7 +69,7 @@ export class ProductsListComponent implements OnInit {
             ...this.dataSource.data,
             ...response.products,
           ];
-          this.skip += this.limit; // Incrementa il numero di prodotti caricati
+          this.skip += this.limit;
         },
         (error: Error) => {
           console.error('Error loading products', error);
@@ -94,8 +94,8 @@ export class ProductsListComponent implements OnInit {
   }
 
   onProductCreated(newProduct: Product): void {
-    this.dataSource.data.unshift(newProduct); // Aggiungi il nuovo prodotto all'inizio della lista
-    this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
+    this.dataSource.data.unshift(newProduct);
+    this.dataSource._updateChangeSubscription();
   }
 
   openProduct(product: Product): void {
@@ -112,14 +112,13 @@ export class ProductsListComponent implements OnInit {
       }
     });
   }
-  // Funzione per ricevere i dati aggiornati dalla modale
   onProductUpdated(updatedProduct: Product): void {
     const index = this.dataSource.data.findIndex(
       (product) => product.id === updatedProduct.id
     );
     if (index !== -1) {
-      this.dataSource.data[index] = updatedProduct; // Aggiorna il prodotto nella lista
-      this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
+      this.dataSource.data[index] = updatedProduct;
+      this.dataSource._updateChangeSubscription();
     }
   }
 
@@ -143,21 +142,18 @@ export class ProductsListComponent implements OnInit {
       (product) => product.id === deletedProduct.id
     );
     if (index !== -1) {
-      // Rimuove il prodotto dalla lista
       this.dataSource.data.splice(index, 1);
-      this.dataSource._updateChangeSubscription(); // Forza il refresh della tabella
+      this.dataSource._updateChangeSubscription();
     }
   }
 
   processedTags(element: any): string[] {
     if (typeof element === 'string') {
-      // Trasforma la stringa in un array separando con la virgola (o altro separatore)
       return element.split(',').map((tag) => tag.trim());
     }
     return element || [];
   }
 
-  // Metodo per rilevare lo scroll e caricare altri prodotti quando la pagina viene scrollata
   @HostListener('window:scroll', [])
   onScroll(): void {
     if (this.isLoading) return;

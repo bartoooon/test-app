@@ -17,10 +17,10 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./detail-modal.component.scss'],
 })
 export class DetailModalComponent implements OnInit {
-  @Output() productUpdated = new EventEmitter<any>(); // Evento per notificare il padre
+  @Output() productUpdated = new EventEmitter<any>();
 
-  isEditable: boolean = false; // Inizialmente i campi sono disabilitati
-  product: Product; // Per contenere i dati del prodotto
+  isEditable: boolean = false;
+  product: Product;
   availabilityStatuses = ['In Stock', 'Low Stock', 'Out of Stock'];
 
   constructor(
@@ -29,22 +29,19 @@ export class DetailModalComponent implements OnInit {
     private productsService: ProductsService,
     private authService: AuthService
   ) {
-    this.product = { ...data.product }; // Imposta i dati iniziali
-    this.isEditable = data.isEditable; // Imposta i dati iniziali
+    this.product = { ...data.product };
+    this.isEditable = data.isEditable;
   }
 
   ngOnInit(): void {}
 
-  // Funzione per alternare lo stato di modifica
   toggleEdit(): void {
     if (this.isEditable) {
-      // Logica per salvare le modifiche (simulazione della POST)
       if (
         !this.product.title ||
         !this.product.price ||
         !this.product.availabilityStatus
       ) {
-        // Se i campi non sono compilati, mostra uno snackBar
         this.authService.showError('Per favore, compila tutti i campi.');
         return;
       }
@@ -66,8 +63,8 @@ export class DetailModalComponent implements OnInit {
     if (Object.keys(newProduct).length > 0) {
       this.productsService.addProduct(newProduct).subscribe((response) => {
         console.log('Product added successfully:', response);
-        this.productUpdated.emit(this.product); // Notifica al componente padre dell'aggiornamento
-        this.dialogRef.close(this.product); // Chiudi la modale dopo l'aggiornamento      },
+        this.productUpdated.emit(this.product);
+        this.dialogRef.close(this.product);
         (error: any) => {
           console.error('Error adding product:', error);
         };
@@ -88,14 +85,13 @@ export class DetailModalComponent implements OnInit {
       tags: this.product.tags,
     };
     if (Object.keys(updatedData).length > 0) {
-      // Se ci sono modifiche, chiama il servizio per aggiornare il prodotto
       this.productsService
         .updateProduct(this.product.id, updatedData)
         .subscribe(
           (response) => {
             console.log('Product updated:', response);
-            this.productUpdated.emit(this.product); // Notifica al componente padre dell'aggiornamento
-            this.dialogRef.close(this.product); // Chiudi la modale dopo l'aggiornamento
+            this.productUpdated.emit(this.product);
+            this.dialogRef.close(this.product);
           },
           (error) => {
             console.error('Error updating product:', error);
@@ -106,7 +102,6 @@ export class DetailModalComponent implements OnInit {
     }
   }
 
-  // Funzione per chiudere la modale
   close(data?: any): void {
     this.dialogRef.close(data);
   }

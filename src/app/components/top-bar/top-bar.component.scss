@@ -3,16 +3,14 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Per garantire che sia sopra gli altri elementi */
+  z-index: 1000;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Spaziatore per separare gli elementi */
 .spacer {
   flex: 1 1 auto;
 }
 
-/* Per evitare che il contenuto si sovrapponga alla navbar */
 .content {
   margin-top: 64px; /* Altezza del mat-toolbar */
 }

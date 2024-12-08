@@ -42,13 +42,10 @@ export class AuthService {
         if (response && response.accessToken) {
           this.setToken(response.accessToken, response.username); // Salva il token
         }
-        return response; // Restituisce la risposta completa
+        return response;
       }),
       catchError((error) => {
-        // Gestisci l'errore e mostra un messaggio tramite snackbar
         let errorMessage = 'Errore durante il login. Riprova.';
-
-        // Verifica se l'errore è legato a credenziali non valide
         if (error.status === 401 || error.error?.message) {
           errorMessage = 'Credenziali non valide. Riprova!';
         }

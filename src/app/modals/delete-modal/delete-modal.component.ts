@@ -10,20 +10,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './delete-modal.component.scss',
 })
 export class DeleteModalComponent {
-  @Output() productDeleted = new EventEmitter<any>(); // Evento per notificare il padre
+  @Output() productDeleted = new EventEmitter<any>();
 
-  isEditable = false; // Inizialmente i campi sono disabilitati
-  product: any; // Per contenere i dati del prodotto
+  isEditable = false;
+  product: any;
   availabilityStatuses = ['In Stock', 'Low Stock', 'Out of Stock'];
 
   constructor(
     public dialogRef: MatDialogRef<DeleteModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private productsService: ProductsService // Inietta il servizio
+    private productsService: ProductsService
   ) {
-    this.product = { ...data.product }; // Imposta i dati iniziali
+    this.product = { ...data.product };
   }
-  // Funzione per chiudere la modale
   close(data?: any): void {
     this.dialogRef.close(data);
   }
@@ -32,8 +31,8 @@ export class DeleteModalComponent {
     this.productsService.deleteProduct(data.id).subscribe(
       (response) => {
         console.log('Prodotto eliminato con successo', response);
-        this.productDeleted.emit(this.product); // Notifica al componente padre dell'aggiornamento
-        this.dialogRef.close(this.product); // Chiudi la modale dopo l'aggiornamento
+        this.productDeleted.emit(this.product);
+        this.dialogRef.close(this.product);
       },
       (error) => {
         console.error("Errore durante l'eliminazione del prodotto", error);

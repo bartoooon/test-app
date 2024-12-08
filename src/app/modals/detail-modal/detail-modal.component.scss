@@ -19,17 +19,17 @@ mat-dialog-content {
 
 .product-details {
   display: grid;
-  grid-template-columns: 1fr; /* Per la prima riga, una sola colonna */
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
 .product-name {
-  grid-column: span 2; /* Fai in modo che il nome prodotto prenda tutta la larghezza della prima riga */
+  grid-column: span 2;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Due colonne per gli altri campi */
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
@@ -39,7 +39,7 @@ mat-dialog-content {
 
 @media (max-width: 600px) {
   .grid-container {
-    grid-template-columns: 1fr; /* Su schermi piccoli, metti tutto in una colonna */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -51,13 +51,13 @@ mat-dialog-content {
 }
 
 .product-details {
-  flex-grow: 1; /* Permette al contenuto di espandersi e occupare tutto lo spazio disponibile */
-  overflow-y: auto; /* Aggiunge una barra di scorrimento se il contenuto è troppo lungo */
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .edit-button {
-  margin-top: auto; /* Spinge il bottone in fondo */
-  width: auto; /* Imposta la larghezza automatica */
-  align-self: flex-start; /* Allinea il bottone a sinistra o a destra, a seconda delle preferenze */
+  margin-top: auto;
+  width: auto;
+  align-self: flex-start;
   height: 48px;
 }

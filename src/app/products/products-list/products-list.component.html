@@ -7,7 +7,6 @@
   </div>
 
   <div class="table-wrapper">
-    <!-- Scrollable Table -->
     <div class="table-scrollable">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="price">
@@ -16,14 +15,10 @@
             {{ element.price ?? "-" }}
           </td>
         </ng-container>
-        <!-- Name Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>Prodotto</th>
           <td mat-cell *matCellDef="let element">{{ element.title ?? "-" }}</td>
         </ng-container>
-        <!-- Price Column -->
-
-        <!-- AvailabilityStatus Column -->
         <ng-container matColumnDef="availabilityStatus">
           <th mat-header-cell *matHeaderCellDef>Disponibilità</th>
           <td mat-cell *matCellDef="let element">
@@ -34,30 +29,22 @@
             <div *ngIf="!element.availabilityStatus">-</div>
           </td>
         </ng-container>
-
-        <!-- Brand Column -->
         <ng-container matColumnDef="brand">
           <th mat-header-cell *matHeaderCellDef>Brand</th>
           <td mat-cell *matCellDef="let element">{{ element.brand ?? "-" }}</td>
         </ng-container>
-
-        <!-- Rating Column -->
         <ng-container matColumnDef="rating">
           <th mat-header-cell *matHeaderCellDef>Voto</th>
           <td mat-cell *matCellDef="let element">
             {{ element.rating ?? "-" }}
           </td>
         </ng-container>
-
-        <!-- Category Column -->
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef>Categoria</th>
           <td mat-cell *matCellDef="let element">
             {{ element.category ?? "-" }}
           </td>
         </ng-container>
-
-        <!-- Tags Column -->
         <ng-container matColumnDef="tags">
           <th mat-header-cell *matHeaderCellDef>Tags</th>
           <td mat-cell *matCellDef="let element">
@@ -69,8 +56,6 @@
             <div *ngIf="!element.tags">-</div>
           </td>
         </ng-container>
-
-        <!-- Header and Row Definitions -->
         <tr
           mat-header-row
           *matHeaderRowDef="displayedColumnsWithoutActions"
