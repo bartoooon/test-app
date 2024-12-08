@@ -8,7 +8,7 @@ This project uses Docker to build and run an Angular application. It also uses D
 
 To run TestApp with docker use the following commands:
 
-1. docker-compose up --build -d
+1.(First run) docker-compose up --build -d
 
 This command does the following:
 
