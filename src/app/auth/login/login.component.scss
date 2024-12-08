@@ -1,6 +1,10 @@
 .container-form {
   margin: auto;
   width: 300px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leggera ombra */
 
   .form-vertical {
     display: flex;
@@ -10,6 +14,44 @@
       width: 100%;
 
       mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+
+  height: 100vh;
+  .image-container {
+    display: flex;
+    margin: auto;
+    width: 50%;
+    img {
+      margin: auto;
+      width: 550px;
+    }
+  }
+  .wrapper {
+    display: flex;
+    margin: auto;
+    width: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .login-container {
+    .image-container {
+      display: none;
+    }
+    .wrapper {
+      width: 100%;
+      margin-left: 16px;
+      margin-right: 16px;
+
+      .container-form {
         width: 100%;
       }
     }

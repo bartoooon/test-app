@@ -1,35 +1,40 @@
-<div>
-  <div class="container-form">
-    <h2>Login</h2>
-    <form (submit)="login()" class="form-vertical">
-      <mat-form-field>
-        <mat-label>Username:</mat-label>
-        <input
-          matInput
-          type="text"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password:</mat-label>
-        <input
-          matInput
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-      </mat-form-field>
-      <button mat-fab type="submit" extended>Login</button>
-      <p>
-        Non hai ancora un account?
-        <a [routerLink]="'/auth/register'">Registrati</a>
-      </p>
-      <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
-    </form>
+<div class="login-container">
+  <div class="image-container">
+    <img src="/logoipsum-330.svg" alt="Login Image" class="login-image" />
+  </div>
+  <div class="wrapper">
+    <div class="container-form">
+      <h2>Login</h2>
+      <form (submit)="login()" class="form-vertical">
+        <mat-form-field>
+          <mat-label>Username:</mat-label>
+          <input
+            matInput
+            type="text"
+            id="username"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password:</mat-label>
+          <input
+            matInput
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </mat-form-field>
+        <button mat-fab type="submit" extended>Login</button>
+        <p>
+          Non hai ancora un account?
+          <a [routerLink]="'/auth/register'">Registrati</a>
+        </p>
+        <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+      </form>
+    </div>
   </div>
 </div>
